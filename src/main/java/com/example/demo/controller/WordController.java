@@ -28,7 +28,7 @@ public class WordController {
     @GetMapping("/words/{id}")
     public ResponseEntity<Word> getWordById(@PathVariable(value = "id") Long wordId)
             throws ResourceNotFoundException {
-        Optional<Word> optionalWord =  service.findById(wordId);
+        Optional<Word> optionalWord  =  service.findById(wordId);
 
         if( !optionalWord.isPresent()) {
             throw  new ResourceNotFoundException("Word not found for this id :: " + wordId);
