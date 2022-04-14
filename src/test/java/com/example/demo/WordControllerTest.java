@@ -64,7 +64,6 @@ public class WordControllerTest {
         List<Word> words = new ArrayList<>(Arrays.asList(word1,word2,word3,word4,word5,word6));
 
         Mockito.when(wordService.findAll()).thenReturn(words);
-
         mockMvc.perform
                         (MockMvcRequestBuilders
                 .get("/api/v1/words")
@@ -110,9 +109,7 @@ public class WordControllerTest {
                 .word("spring data jpa")
                 .build();
         Mockito.when(wordService.save(word)).thenReturn(word);
-
         String content   = objectWriter.writeValueAsString(word);
-
         MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders
                                 .post("/api/v1/words")
                                 .accept(MediaType.APPLICATION_JSON)
@@ -141,6 +138,7 @@ public class WordControllerTest {
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content);
+        
         mockMvc.perform(mockRequest)
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$",notNullValue()))
@@ -186,6 +184,11 @@ public class WordControllerTest {
     @Test
     public void deleteWord_Fail() throws Exception{
 
+
+        Integer i = Integer.valueOf("1");
+        if(i.toString() == "1"){
+
+        }
         mockMvc.perform
                         (MockMvcRequestBuilders
                                 .delete("/api/v1/words/7")
